@@ -1,6 +1,7 @@
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using UnityEngine.SceneManagement;
 
 public class GameUIManager : MonoBehaviour
 {
@@ -9,8 +10,10 @@ public class GameUIManager : MonoBehaviour
     [SerializeField] private TextMeshProUGUI scoreText;
     [SerializeField] private TextMeshProUGUI gameOverText;
     [SerializeField] private TextMeshProUGUI hiscoreText;
+    [SerializeField] private TextMeshProUGUI livesText;
     [SerializeField] private Button retryButton;
     [SerializeField] private Button quitButton;
+    [SerializeField] private Button startButton;
 
     private void Awake()
     {
@@ -70,6 +73,12 @@ public class GameUIManager : MonoBehaviour
         }
 
         hiscoreText.text = "Hi-Score: " + Mathf.FloorToInt(hiscore).ToString("D5");
+    }
+
+    public void UpdateLives(int currentLives)
+    {
+        string currentLivesText = currentLives.ToString();
+        livesText.text = "Lives:" + currentLivesText;
     }
 
     private void RestartGame()

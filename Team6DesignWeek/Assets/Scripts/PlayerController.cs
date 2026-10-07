@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class PlayerController : MonoBehaviour
@@ -21,7 +22,7 @@ public class PlayerController : MonoBehaviour
     //public float reloadTime = .5f;
     //public float reloadTimer = 0f;
     public float reloadTimer = 1f;
-    public float fastReloadTimer = .5f;
+    public float superReloadTimer = .25f;
     public bool hasAmmo;
     [SerializeField] private TextMeshProUGUI ammoText;
     //for finding bullet
@@ -30,6 +31,11 @@ public class PlayerController : MonoBehaviour
     //for flipping sprite
     SpriteRenderer sr;
 
+    //check if any enemies are in Player radius
+    public float detectionRadius = 1f;
+    bool isClose = false;
+    //use to only detect objects to the right of player
+    new Vector3 delay = new Vector3(3,0,0);
 
     private int lives = 3;
 
@@ -37,7 +43,7 @@ public class PlayerController : MonoBehaviour
     {
         controller = GetComponent<CharacterController>();
         sr = GetComponent<SpriteRenderer>();
-        updateAmmo();
+        UpdateAmmo();
         BgAudio.Play(); // Plays background audio
     }
 
@@ -48,29 +54,74 @@ public class PlayerController : MonoBehaviour
 
     private void Update()
     {
+        
+        //create collider array to check if any colliders are within range of player transform
+         Collider[] hitColliders = Physics.OverlapSphere(transform.position + delay, detectionRadius);
+        //create loop checking for any colliders within range of the player
+        foreach (var hitCollider in hitColliders)
+        {
+            if (hitCollider.CompareTag("Obstacle"))
+            {
+                // Insert your obstacle handling logic here (e.g., stop moving, turn around)
+                isClose = true;
+                Debug.Log($"is close" + isClose);
+            }
+            else 
+            {
+                // Insert your obstacle handling logic here (e.g., stop moving, turn around)
+                isClose = false;
+                Debug.Log("isClose" + isClose);
+            }
+        }
+        
 
         if (controller.isGrounded && hasAmmo == true) // If grounded allows the player to jump
         {
             velocity.y = -1f;
             sr.flipX = false; //flip right
 
-            if (Input.GetMouseButtonDown(0))
+            //player is very close to an obstacle
+            if(isClose == true)
             {
-                hasAmmo = false;
-                StartCoroutine(regularTimer(reloadTimer));
-                velocity.y = jumpStrength;
-                jumpAudio.Play(); // Plays jump one-shot sound
-                gunAudio.Play(); // Plays shot audio
-                Debug.Log(lives);
+                if (Input.GetMouseButtonDown(0))
+                {
+                    hasAmmo = false;
+                    velocity.y = jumpStrength;
+                    jumpAudio.Play(); // Plays jump one-shot sound
+                    gunAudio.Play(); // Plays shot audio
+                    Debug.Log(lives);
+                    StartCoroutine(SuperTimer(superReloadTimer));
+                }
+                if (Input.GetMouseButtonDown(1))
+                {
+                    BulletController.Instance.BulletCreator();
+                    hasAmmo = false;
+                    gunAudio.Play(); // Plays shot audio
+                    Debug.Log(lives);
+                    StartCoroutine(SuperTimer(superReloadTimer));
+                }
             }
-
-            if(Input.GetMouseButtonDown(1))
+            
+            //player is not within 1f of an obstacle
+            if (isClose == false)
             {
-                hasAmmo = false;
-                StartCoroutine(regularTimer(reloadTimer));
-                BulletController.Instance.bulletCreator();
-                gunAudio.Play(); // Plays shot audio
-
+                if (Input.GetMouseButtonDown(0))
+                {
+                    hasAmmo = false;
+                    velocity.y = jumpStrength;
+                    jumpAudio.Play(); // Plays jump one-shot sound
+                    gunAudio.Play(); // Plays shot audio
+                    Debug.Log(lives);
+                    StartCoroutine(RegularTimer(reloadTimer));
+                }
+                if (Input.GetMouseButtonDown(1))
+                {
+                    BulletController.Instance.BulletCreator();
+                    hasAmmo = false;
+                    gunAudio.Play(); // Plays shot audio
+                    Debug.Log(lives);
+                    StartCoroutine(RegularTimer(reloadTimer));
+                }
             }
         }
         if (!controller.isGrounded)
@@ -82,7 +133,7 @@ public class PlayerController : MonoBehaviour
         controller.Move(velocity * Time.deltaTime); // Applies movement
         Health();
         GameUIManager.Instance.UpdateLives(lives);
-        updateAmmo();
+        UpdateAmmo();
     }
 
     private void OnTriggerEnter(Collider other)
@@ -109,7 +160,7 @@ public class PlayerController : MonoBehaviour
 
     }
 
-    public void updateAmmo()
+    public void UpdateAmmo()
     {
         int ammoNumber;
 
@@ -125,7 +176,7 @@ public class PlayerController : MonoBehaviour
         ammoText.text = ammoNumber + "/1";
     }
 
-    IEnumerator regularTimer(float reload)
+    IEnumerator RegularTimer(float reload)
     {
         Debug.Log("Routine started!");
         yield return new WaitForSeconds(reload); // Pauses execution
@@ -134,7 +185,7 @@ public class PlayerController : MonoBehaviour
         Debug.Log("Ammo reloaded after" + reload + " seconds!");
     }
 
-    IEnumerator acceleratedTimer(float reload)
+    public IEnumerator SuperTimer(float reload)
     {
         Debug.Log("Routine started!");
         yield return new WaitForSeconds(reload); // Pauses execution

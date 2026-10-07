@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
@@ -64,7 +65,7 @@ public class GameManager : MonoBehaviour
     public void StartNewGame()
     {
 
-        // Clears all cacti from the game to prevent restart glitches
+        //Clears all cacti from the game to prevent restart glitches
         ClearAllObstacles();
 
         score = 0f;
@@ -74,10 +75,10 @@ public class GameManager : MonoBehaviour
         player.gameObject.SetActive(true);
         spawner.gameObject.SetActive(true);
 
-        // Reset the background colour to white
+        //Reset the background colour to white
         Background bg = FindObjectOfType<Background>();
         if (bg != null)
-            bg.ResetBackground();
+        bg.ResetBackground();
 
         GameUIManager.Instance.HideGameOverUI();
     }

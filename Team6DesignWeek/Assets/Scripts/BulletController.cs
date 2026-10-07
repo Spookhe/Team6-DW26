@@ -32,7 +32,7 @@ public class BulletController : MonoBehaviour
            newBullet.transform.Translate(Vector3.right * GameManager.Instance.gameSpeed * Time.deltaTime);
        }
     }
-    public void bulletCreator()
+    public void BulletCreator()
     {
         if(bullet == null)
         {

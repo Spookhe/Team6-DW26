@@ -1801,6 +1801,8 @@ MonoBehaviour:
   objects:
   - prefab: {fileID: 2950289851316751453, guid: 2e28ce5f8723f104da7bc8905c1d518b, type: 3}
     chanceToSpawn: 0
+  - prefab: {fileID: 8569453942403967749, guid: 972573419f6f10649ba6934f462d2da7, type: 3}
+    chanceToSpawn: 0
   minSpawnRate: 1
   maxSpawnRate: 2
 --- !u!4 &1261872148

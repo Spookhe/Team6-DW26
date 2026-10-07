@@ -72,8 +72,8 @@ public class GameManager : MonoBehaviour
         gameSpeed = initialSpeed;
         enabled = true;
 
-        player.gameObject.SetActive(true);
-        spawner.gameObject.SetActive(true);
+        //player.gameObject.SetActive(true);
+        //spawner.gameObject.SetActive(true);
 
         //Reset the background colour to white
         Background bg = FindObjectOfType<Background>();

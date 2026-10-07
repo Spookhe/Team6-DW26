@@ -147,6 +147,14 @@ public class PlayerController : MonoBehaviour
             //GameManager.Instance.initialSpeed -= 1f;
         }
 
+        if (other.CompareTag("wall"))
+        {
+            damageAudio.Play(); // Plays damage sound
+            lives--;
+            //velocity = Vector3.zero; // Resets player movement state //lower player/game speed/score?
+            //GameManager.Instance.initialSpeed -= 1f;
+        }
+
     }
 
     public void Health()

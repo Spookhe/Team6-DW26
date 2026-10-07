@@ -26,6 +26,8 @@ public class GameUIManager : MonoBehaviour
 
         Instance = this;
 
+        retryButton.onClick.AddListener(RestartGame);
+        quitButton.onClick.AddListener(QuitGame);
 
     }
 
@@ -49,9 +51,6 @@ public class GameUIManager : MonoBehaviour
         gameOverText.gameObject.SetActive(true);
         retryButton.gameObject.SetActive(true);
         quitButton.gameObject.SetActive(true);
-        
-        retryButton.onClick.AddListener(RestartGame);
-        quitButton.onClick.AddListener(QuitGame);
 
         UpdateHiscore(currentScore);
     }

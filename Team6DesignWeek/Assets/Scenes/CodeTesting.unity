@@ -1603,7 +1603,7 @@ MonoBehaviour:
   objects:
   - prefab: {fileID: 6416605719790964672, guid: ed34812346c7e8b4d9b2ace0d331b369, type: 3}
     chanceToSpawn: 0
-  - prefab: {fileID: 8569453942403967749, guid: 972573419f6f10649ba6934f462d2da7, type: 3}
+  - prefab: {fileID: 350917841211610174, guid: 57ab5f5d06b5e5544b24b515a2c73f7d, type: 3}
     chanceToSpawn: 0
   minSpawnRate: 1
   maxSpawnRate: 2
@@ -2287,7 +2287,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   gravityStrength: 19
-  jumpStrength: 8
+  jumpStrength: 11
   jumpAudio: {fileID: 1469276687}
   damageAudio: {fileID: 1688016025}
   gunAudio: {fileID: 1123276130}
@@ -2298,7 +2298,7 @@ MonoBehaviour:
   hasAmmo: 1
   ammoText: {fileID: 117374551}
   bullet: {fileID: 7897322637970011765, guid: 759697985397d9642bd35afa417cf59f, type: 3}
-  detectionRadius: 1
+  detectionRadius: 2
 --- !u!1 &1943829828
 GameObject:
   m_ObjectHideFlags: 0

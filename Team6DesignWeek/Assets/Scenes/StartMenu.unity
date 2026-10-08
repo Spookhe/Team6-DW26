@@ -574,12 +574,20 @@ PrefabInstance:
       value: StartBG-HD
       objectReference: {fileID: 0}
     - target: {fileID: 9195298361665315238, guid: 87703c119329a2942b5d2a167389c1f4, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 1.12
+      objectReference: {fileID: 0}
+    - target: {fileID: 9195298361665315238, guid: 87703c119329a2942b5d2a167389c1f4, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 0.84
+      objectReference: {fileID: 0}
+    - target: {fileID: 9195298361665315238, guid: 87703c119329a2942b5d2a167389c1f4, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0.0218
+      value: -0.006
       objectReference: {fileID: 0}
     - target: {fileID: 9195298361665315238, guid: 87703c119329a2942b5d2a167389c1f4, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -0.0435
+      value: 0.02
       objectReference: {fileID: 0}
     - target: {fileID: 9195298361665315238, guid: 87703c119329a2942b5d2a167389c1f4, type: 3}
       propertyPath: m_LocalPosition.z

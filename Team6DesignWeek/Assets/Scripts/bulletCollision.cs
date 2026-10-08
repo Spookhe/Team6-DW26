@@ -11,5 +11,9 @@ public class bulletCollision : MonoBehaviour
             Destroy(other.gameObject);
             Destroy(gameObject);
         }
+        if (other.CompareTag("wall"))
+        {
+            Destroy(gameObject);
+        }
     }
 }

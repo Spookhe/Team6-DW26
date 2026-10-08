@@ -67,8 +67,10 @@ public class GameManager : MonoBehaviour
 
         //Clears all cacti from the game to prevent restart glitches
         ClearAllObstacles();
+        GameUIManager.Instance.HideGameOverUI();
 
         score = 0f;
+        PlayerController.lives = 3;
         gameSpeed = initialSpeed;
         enabled = true;
 
@@ -80,7 +82,6 @@ public class GameManager : MonoBehaviour
         if (bg != null)
         bg.ResetBackground();
 
-        GameUIManager.Instance.HideGameOverUI();
     }
 
     // Clears all "obstacle" tags before restarting the game

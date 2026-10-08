@@ -37,7 +37,7 @@ public class PlayerController : MonoBehaviour
     //use to only detect objects to the right of player
     new Vector3 delay = new Vector3(3,0,0);
 
-    private int lives = 3;
+    static public int lives = 3;
 
     private void Awake()
     {
